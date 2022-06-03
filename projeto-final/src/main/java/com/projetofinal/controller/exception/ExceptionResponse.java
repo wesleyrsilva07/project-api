@@ -62,8 +62,8 @@ public class ExceptionResponse extends RuntimeException {
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<Object> MethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-		return new ResponseEntity<>(new ExceptionDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error"),
-				HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(new ExceptionDto(HttpStatus.BAD_REQUEST.value(), "Error"),
+				HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)

@@ -3,8 +3,14 @@ package com.projetofinal.service;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +29,10 @@ public class ProductServiceImplements implements ProductService {
 	@Autowired
 	ProductRepository produtoRepository;
 
-	public List<ProductDto> list() {
-		List<Product> produtos = produtoRepository.findAll();
-		return ProductDto.converter(produtos);
+	public Page<ProductDto> list(Pageable paginacao) {	
+		
+		Page<Product> produtos = produtoRepository.findAll(paginacao);
+		return ProductDto.convert(produtos);
 	}
 
 	public ResponseEntity<ProductDto> delete(@PathVariable Long id) {
