@@ -17,6 +17,6 @@ public interface ProductService {
 	ResponseEntity<ProductDto> findById(@PathVariable Long id);
 	ResponseEntity<ProductDto> create(@RequestBody ProductForm form, UriComponentsBuilder uriBuilder);
 	ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody UpdateProductForm form);
-	ResponseEntity<?> delete(@PathVariable Long id);
+	ResponseEntity<ProductDto> delete(@PathVariable Long id);
 	List<ProductDto> search(@RequestParam(required = false) Double maxPrice, @RequestParam(required = false) Double minPrice, @RequestParam(required = false) String q);
 }

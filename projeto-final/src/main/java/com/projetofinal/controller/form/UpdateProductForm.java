@@ -4,11 +4,10 @@ import com.projetofinal.modelo.Product;
 import com.projetofinal.repository.ProductRepository;
 
 public class UpdateProductForm {
-	
 	private String description;
 	private String name;
 	private Double price;
-	
+
 	public Product atualizar(Long id, ProductRepository produtoRepository) {
 		Product produto = produtoRepository.getReferenceById(id);
 		produto.setDescription(this.description);
@@ -40,6 +39,5 @@ public class UpdateProductForm {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
 
 }

@@ -1,10 +1,8 @@
 package com.projetofinal.controller.exception;
 
 import java.util.NoSuchElementException;
-
 import javax.persistence.EntityNotFoundException;
 import javax.validation.UnexpectedTypeException;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
