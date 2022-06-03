@@ -1,10 +1,7 @@
 package com.projetofinal.controller;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import com.projetofinal.controller.dto.ProductDto;
 import com.projetofinal.controller.form.ProductForm;
 import com.projetofinal.controller.form.UpdateProductForm;
@@ -34,8 +32,9 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping
-	public Page<ProductDto> list(@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 3) Pageable paginacao) {
-		
+	public Page<ProductDto> list(
+			@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 3) Pageable paginacao) {
+
 		return productService.list(paginacao);
 	}
 
@@ -59,9 +58,11 @@ public class ProductController {
 
 	@GetMapping("/search")
 	@Transactional
-	public List<ProductDto> search(@RequestParam(required = false) Double maxPrice,
-			@RequestParam(required = false) Double minPrice, @RequestParam(required = false) String q) {
-		return productService.search(maxPrice, minPrice, q);
+	public Page<ProductDto> search(@RequestParam(required = false) Double maxPrice,
+			@RequestParam(required = false) Double minPrice, @RequestParam(required = false) String q,
+			@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 3)
+			Pageable paginacao) {
+		return productService.search(maxPrice, minPrice, q, paginacao);
 	}
 
 	@DeleteMapping("/{id}")

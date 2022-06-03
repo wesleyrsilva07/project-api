@@ -1,7 +1,6 @@
 package com.projetofinal.service;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -9,14 +8,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import com.projetofinal.controller.dto.ProductDto;
 import com.projetofinal.controller.form.ProductForm;
 import com.projetofinal.controller.form.UpdateProductForm;
@@ -63,10 +60,9 @@ public class ProductServiceImplements implements ProductService {
 		return ResponseEntity.ok(new ProductDto(produto));
 	}
 
-	public List<ProductDto> search(@RequestParam(required = false) Double maxPrice,
-			@RequestParam(required = false) Double minPrice, @RequestParam(required = false) String q) {
-		List<Product> product = produtoRepository.findByPrice(maxPrice, minPrice, q);
-		return ProductDto.converter(product);
+	public Page<ProductDto> search(Double maxPrice, Double minPrice,  String q, Pageable paginacao) {
+		Page<Product> product = produtoRepository.findByPrice(maxPrice, minPrice, q, paginacao);
+		return ProductDto.convert(product);
 	}
 
 }
